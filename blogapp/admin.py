@@ -2,7 +2,8 @@ from django.contrib import admin
 from blogapp.models import ( 
     KategoriModel,
     YazilarModel,
-    YorumModel
+    YorumModel,
+    IletisimModel
 )
 
 admin.site.register(KategoriModel)
@@ -25,3 +26,9 @@ class YorumAdmin(admin.ModelAdmin):
     search_fields = ('yazar__username',)
 
 admin.site.register(YorumModel, YorumAdmin)
+
+class IletisimAdmin(admin.ModelAdmin):
+    list_display = ('email','isim_soyisim','mesaj','olusturma_tarihi')
+    search_fields = ('email',)
+
+admin.site.register(IletisimModel, IletisimAdmin)
