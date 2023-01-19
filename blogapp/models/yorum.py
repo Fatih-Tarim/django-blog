@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from blogapp.models import YazilarModel
 
 class YorumModel(models.Model):
-    yazar = models.ForeignKey(User, on_delete=models.CASCADE, related_name='yorum')
+    yazar = models.ForeignKey('account.CustomUserModel', on_delete=models.CASCADE, related_name='yorum')
     yazi = models.ForeignKey(YazilarModel, on_delete=models.CASCADE, related_name='yorumlar')
     yorum = models.TextField()
     olusturma_tarihi = models.DateTimeField(auto_now_add=True)
