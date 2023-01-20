@@ -8,6 +8,7 @@ from blogapp.models import (
 
 admin.site.register(KategoriModel)
 
+@admin.register(YazilarModel)
 class YazilarAdmin(admin.ModelAdmin):
     search_fields = (
         'baslik',
@@ -15,20 +16,16 @@ class YazilarAdmin(admin.ModelAdmin):
     )
     list_display = (
         'baslik',
-        'tarih', 
-        'duzenlenme_tarihi'
+        'olusturma_tarihi', 
+        'guncellenme_tarihi'
     )
 
-admin.site.register(YazilarModel, YazilarAdmin)
-
+@admin.register(YorumModel)
 class YorumAdmin(admin.ModelAdmin):
     list_display = ('yazar','olusturma_tarihi','guncellenme_tarihi')
     search_fields = ('yazar__username',)
 
-admin.site.register(YorumModel, YorumAdmin)
-
+@admin.register(IletisimModel)
 class IletisimAdmin(admin.ModelAdmin):
     list_display = ('email','isim_soyisim','mesaj','olusturma_tarihi')
     search_fields = ('email',)
-
-admin.site.register(IletisimModel, IletisimAdmin)

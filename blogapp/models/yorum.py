@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from blogapp.models import YazilarModel
+from blogapp.abstract_models import DateAbstractModel
 
-class YorumModel(models.Model):
+class YorumModel(DateAbstractModel):
     yazar = models.ForeignKey('account.CustomUserModel', on_delete=models.CASCADE, related_name='yorum')
     yazi = models.ForeignKey(YazilarModel, on_delete=models.CASCADE, related_name='yorumlar')
     yorum = models.TextField()
-    olusturma_tarihi = models.DateTimeField(auto_now_add=True)
-    guncellenme_tarihi = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table='yorum'
