@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from blogapp.models import YazilarModel
 
 def anasayfa(request):
-    context = {
-        'isim':'Fatih'
-    }
-    return render(request, 'pages/anasayfa.html', context=context)
+    yazilar = YazilarModel.objects.all()
+    return render(request, 'pages/anasayfa.html', context={
+        'yazilar' : yazilar
+    })
 
