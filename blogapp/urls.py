@@ -1,8 +1,11 @@
 
 from django.urls import path
-from blogapp.views import iletisim, anasayfa
+from blogapp.views import iletisim, anasayfa, kategori, yazilarim
 
 urlpatterns = [
     path('', anasayfa, name='anasayfa'),
-    path('iletisim', iletisim, name='iletisim')
+    path('iletisim', iletisim, name='iletisim'),
+    path('kategori/<slug:kategoriSlug>', kategori, name='kategori'),
+    path('yazilarim', yazilarim, name='yazilarim')
+
 ]
