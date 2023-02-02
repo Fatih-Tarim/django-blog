@@ -1,12 +1,14 @@
 {% extends 'base.html'%}
 
+{% load crispy_forms_tags %}
+
 {% block title %} İletişim {% endblock %}
 
 {% block content %}
 
 <form method="POST">
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy}}
     <input type="submit" value="GÖNDER" class="btn btn-success">
 </form>
 

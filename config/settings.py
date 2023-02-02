@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'account',
     'blogapp',
     #third party
-    'ckeditor'
+    'ckeditor',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
