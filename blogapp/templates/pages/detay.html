@@ -20,8 +20,9 @@
           <small class="text-muted">Last Update: {{ yazi.guncellenme_tarihi|timesince}}</small>
           {% if request.user == yazi.yazar %}
           <p>
-            <a class="btn btn-warning" href="{% url 'yazi_guncelle' slug=yazi.slug %}">Düzenle</a>
-          </p>  
+            <a class="btn btn-warning" href="{% url 'yazi_guncelle' slug=yazi.slug %}">Düzenle</a> 
+            <a class="btn btn-danger" href="{% url 'yazi_sil' slug=yazi.slug %}">Sil</a>
+          </p> 
           {% endif %}
         </p>
       </div>
