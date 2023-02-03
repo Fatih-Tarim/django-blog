@@ -16,7 +16,14 @@
       <div class="card-body">
         <h5 class="card-title">{{yazi.baslik}}</h5>
         <p class="card-text">{{ yazi.icerik|safe}}</p>
-        <p class="card-text"><small class="text-muted">Last Update: {{ yazi.guncellenme_tarihi|timesince}}</small></p>
+        <p class="card-text">
+          <small class="text-muted">Last Update: {{ yazi.guncellenme_tarihi|timesince}}</small>
+          {% if request.user == yazi.yazar %}
+          <p>
+            <a class="btn btn-warning" href="{% url 'yazi_guncelle' slug=yazi.slug %}">Düzenle</a>
+          </p>  
+          {% endif %}
+        </p>
       </div>
     </div>
   </div>
