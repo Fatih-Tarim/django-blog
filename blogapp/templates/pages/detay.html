@@ -56,6 +56,7 @@
     <div class="ml-4">
       <h5 class="card-title">{{yorum.yazar.username}}</h5>
       <p class="card-text">{{yorum.yorum}}</p>
+      <p><a href="{% url 'yorum_sil' id=yorum.id %}" class="btn btn-sm btn-danger">Yorum Sil</a></p>
     </div>
   </div>
 </div>
