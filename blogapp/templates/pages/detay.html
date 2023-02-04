@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block title %} {{yazi.baslik}} {% endblock %}
 
 {% block content %}
@@ -31,9 +33,18 @@
 </div>
 
 <h5>Yorumlar</h5>
+{% if request.user.is_authenticated %}
+<form method="POST">
+{% csrf_token %}
+{{ yorum_ekle_form|crispy }}
+<input type="submit" class="btn btn-primary mt-3 mb-3" value="Yorum Yap!">
+</form>
 
+{% else %}
+<p>Yorum yapmak için giriş yapınız</p>
+{% endif %}
 {% for yorum in yorumlar %}
-<div class="card">
+<div class="card mb-3">
   <div class="card-body" style="display:flex;flex-direction: row;">
     <div>
       {% if  yorum.avatar%}
@@ -49,7 +60,7 @@
   </div>
 </div>
 {% empty %}
-Bu yazının hiç yorumu yok...
+<br>Bu yazının hiç yorumu yok...
 
 {% endfor %}
 
