@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Şifre Değiştir {% endblock %}
+
+{% block content %}
+
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Şifre Değiştir" class="btn btn-success">
+</form>
+
+{% include 'components/message.html'%}
+
+{% endblock %}

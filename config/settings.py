@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'blogapp',
     #third party
     'ckeditor',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +119,5 @@ AUTH_USER_MODEL = 'account.CustomUserModel'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
