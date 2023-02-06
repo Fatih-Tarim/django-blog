@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Profil Guncelle {% endblock %}
+
+{% block content %}
+
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Profili Güncelle" class="btn btn-success">
+</form>
+
+{% include 'components/message.html'%}
+
+{% endblock %}
