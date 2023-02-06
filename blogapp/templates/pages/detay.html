@@ -40,6 +40,15 @@
 <input type="submit" class="btn btn-primary mt-3 mb-3" value="Yorum Yap!">
 </form>
 
+<!-- Messages Framework -->
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }} 
+    </div>     
+    {% endfor %}
+{% endif %}
+
 {% else %}
 <p>Yorum yapmak için giriş yapınız</p>
 {% endif %}
