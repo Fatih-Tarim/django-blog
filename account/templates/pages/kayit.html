@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Kullanıcı Kayıt {% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Kayıt Ol!" class="btn btn-success">
+</form>
+
+{% include 'components/message.html'%}
+
+{% endblock %}
