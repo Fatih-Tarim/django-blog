@@ -1,12 +1,12 @@
 
 from django.urls import path
-from blogapp.views import iletisim, anasayfa, kategori, yazilarim, DetayView, yazi_ekle, yazi_guncelle, yazi_sil, yorum_sil
+from blogapp.views import iletisim, anasayfa, KategoriListView, yazilarim, DetayView, yazi_ekle, yazi_guncelle, yazi_sil, yorum_sil
 from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
     path('', anasayfa, name='anasayfa'),
     path('iletisim', iletisim, name='iletisim'),
-    path('kategori/<slug:kategoriSlug>', kategori, name='kategori'),
+    path('kategori/<slug:kategoriSlug>', KategoriListView.as_view(), name='kategori'),
     path('yazilarim', yazilarim, name='yazilarim'),
     path('detay/<slug:slug>', DetayView.as_view(), name='detay'),
     path('yazi_ekle', yazi_ekle, name='yazi_ekle'),
