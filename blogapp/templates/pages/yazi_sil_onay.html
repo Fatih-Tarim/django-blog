@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Emin misin? {% endblock %}
+
+{% block content %}
+<div class='text-center mt-5'>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy}}
+        <p>Silmek istediğine emin misin?</p>
+        <input type="submit" value="Evet" class="btn btn-success">
+    </form>
+</div>
+
+{% endblock %}
