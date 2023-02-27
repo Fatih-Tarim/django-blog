@@ -3,10 +3,12 @@ from blogapp.forms import YaziGuncelleFormModel
 from blogapp.models import YazilarModel
 from django.contrib.auth.decorators import login_required
 from django.views.generic import UpdateView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class YaziGuncelleUpdateView(UpdateView):
+class YaziGuncelleUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('giris')
     template_name = 'pages/yazi_guncelle.html'
     fields = ('baslik', 'icerik', 'resim', 'kategoriler')
 
