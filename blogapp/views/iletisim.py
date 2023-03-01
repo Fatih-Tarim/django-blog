@@ -5,6 +5,7 @@ from blogapp.models import IletisimModel
 from django.views.generic import FormView
 
 
+
 class IletisimFormView(FormView):
     template_name = 'pages/iletisim.html'
     form_class = IletisimForm
@@ -12,7 +13,10 @@ class IletisimFormView(FormView):
 
     def form_valid(self, form):
         form.save()
+        form.send_email(message=form.cleaned_data.get('mesaj'))
         return super().form_valid(form)
+    
+
 
 
 # def iletisim(request):

@@ -1,5 +1,6 @@
 from django import forms
 from blogapp.models import IletisimModel
+from django.core.mail import send_mail
 
 class IletisimForm(forms.ModelForm):
     
@@ -7,6 +8,14 @@ class IletisimForm(forms.ModelForm):
         model = IletisimModel
         fields = ('isim_soyisim','email','mesaj')
 
+    def send_email(self, message):
+        send_mail(
+            subject = 'İletişim formundan mesaj var!',
+            message= message,
+            from_email='dev.fatihtarim@gmail.com',
+            recipient_list=['dev.fatihtarim@gmail.com'],
+            fail_silently=False
+        )
 
 
 
