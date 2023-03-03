@@ -12,7 +12,7 @@ class IletisimForm(forms.ModelForm):
         send_mail(
             subject = 'İletişim formundan mesaj var!',
             message= message,
-            from_email='dev.fatihtarim@gmail.com',
+            from_email=None,
             recipient_list=['dev.fatihtarim@gmail.com'],
             fail_silently=False
         )
