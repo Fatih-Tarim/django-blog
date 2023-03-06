@@ -103,3 +103,31 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dev.fatihtarim@gmail.com'
 EMAIL_HOST_PASSWORD = env('PASSWORD')
 DEFAULT_FROM_EMAIL = 'dev.fatihtarim@gmail.com'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_logger': False,
+    'formatters': {
+        'basit_ifade':{
+
+            'format':'{asctime} {levelname} {message} {process:d} {thread:d} {name}',
+            'style':'{'
+        }
+    },
+    'handlers': {
+        'console':{
+            'class':'logging.StreamHandler'
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename':'logs/konu_okuma.log',
+            'formatter': 'basit_ifade'
+        },
+    },
+    'loggers': {
+        'konu_okuma': {
+            'handlers' : ['console','file'],
+            'level' : 'INFO'
+        }
+    }
+}
