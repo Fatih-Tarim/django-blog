@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'blogapp',
+    'rest_framework',
     #third party
     'ckeditor',
     'crispy_forms',
