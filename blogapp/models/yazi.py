@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 from blogapp.abstract_models import DateAbstractModel
 
 class YazilarModel(DateAbstractModel):
-    resim = models.ImageField(upload_to='yazi_resimleri')
+    resim = models.ImageField(upload_to='yazi_resimleri', blank=True, null=True)
     baslik = models.CharField(max_length=50)
     icerik = RichTextField()
 

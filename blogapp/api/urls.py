@@ -1,11 +1,20 @@
 from django.urls import path, include
 
-from blogapp.api.views import YorumAPIView, KategoriAPIView, YazilarAPIView, YaziResimEkle, YazilarDetailAPIView
+from blogapp.api.views import YorumViewSet, YazilarViewSet, KategoriViewSet
+
+from rest_framework.routers import DefaultRouter
+
+# yorum_list = YorumViewSet.as_view({'get':'list'})
+# yorum_detay = YorumViewSet.as_view({'get': 'retrieve'})
+
+router = DefaultRouter()
+router.register('yorumlar', YorumViewSet)
+router.register('yazilar', YazilarViewSet)
+router.register('kategoriler', KategoriViewSet)
 
 urlpatterns = [
-    # path("yorumlar", YorumAPIView.as_view(), name="yorumlar"),  
-    # path("yazilar", YazilarAPIView.as_view(), name="yazilar"),  
-    # path("yazilar/<str:slug>", YazilarDetailAPIView.as_view(), name="yazilar-detay"),  
-    # path("yazi-resim", YaziResimEkle.as_view(), name="yazi-resim"),  
-    # path("kategoriler", KategoriAPIView.as_view(), name="kategoriler"),  
+     path('', include(router.urls)),
+    # path("yorumlar", yorum_list, name="yorumlar"),
+    # path("yorumlar/<int:pk>", yorum_detay, name="yorumlar")
 ]
+
