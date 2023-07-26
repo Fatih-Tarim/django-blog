@@ -1,7 +1,7 @@
 #rest-framework
 from rest_framework import generics
 from rest_framework import mixins
-from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 #models
@@ -14,17 +14,11 @@ from blogapp.api.serializers import YorumSerializer, YazilarSerializer, Kategori
 #permissions
 from blogapp.api.permissions import CommentOwnerOrReadOnly, IsSuperUser
 
-class YorumViewSet(
-                mixins.ListModelMixin,
-                mixins.RetrieveModelMixin,
-                mixins.UpdateModelMixin,
-                mixins.DestroyModelMixin,
-                mixins.CreateModelMixin,
-                GenericViewSet):
-    
+class YorumViewSet(ModelViewSet): 
     queryset = YorumModel.objects.all()
     serializer_class = YorumSerializer
     permission_classes = [IsAuthenticated, CommentOwnerOrReadOnly]
+    lookup_field = "yorum"
 
 class YazilarViewSet(ReadOnlyModelViewSet):
     queryset = YazilarModel.objects.all()
@@ -32,13 +26,7 @@ class YazilarViewSet(ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class KategoriViewSet(mixins.ListModelMixin,
-                      mixins.RetrieveModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin,
-                      mixins.CreateModelMixin,
-                      GenericViewSet
-                      ):
+class KategoriViewSet(ModelViewSet):
     queryset = KategoriModel.objects.all()
     serializer_class = KategoriSerializer
     permission_classes = [IsAuthenticated, IsSuperUser]
