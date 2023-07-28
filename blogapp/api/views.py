@@ -7,24 +7,28 @@ from rest_framework.permissions import IsAuthenticated
 #models
 from blogapp.models import YorumModel, YazilarModel, KategoriModel
 
-
 #serializers
 from blogapp.api.serializers import YorumSerializer, YazilarSerializer, KategoriSerializer
 
 #permissions
 from blogapp.api.permissions import CommentOwnerOrReadOnly, IsSuperUser, BlogOwnerOrReadOnly
 
+#pagination
+from blogapp.api.pagination import SmallPagination, MediumPagination, LargePagination
+
 class YorumViewSet(ModelViewSet): 
     queryset = YorumModel.objects.all()
     serializer_class = YorumSerializer
     permission_classes = [IsAuthenticated, CommentOwnerOrReadOnly]
     lookup_field = "yorum"
+    pagination_class = MediumPagination
 
 class YazilarViewSet(ModelViewSet):
-    queryset = YazilarModel.objects.all()
+    queryset = YazilarModel.objects.all().order_by("id")
     serializer_class = YazilarSerializer
     permission_classes = [IsAuthenticated, BlogOwnerOrReadOnly]
     lookup_field = "slug"
+    pagination_class = LargePagination
 
     def perform_create(self, serializer):
         yazar = self.request.user
@@ -36,6 +40,7 @@ class KategoriViewSet(ModelViewSet):
     serializer_class = KategoriSerializer
     permission_classes = [IsAuthenticated, IsSuperUser]
     lookup_field = "slug"
+    pagination_class = SmallPagination
 
 
 

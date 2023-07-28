@@ -36,8 +36,6 @@ class YazilarSerializer(serializers.ModelSerializer):
         serializer.save(yazar= yazar)
     
 
-    
-
 class KategoriSerializer(serializers.ModelSerializer):
     class Meta:
         model = KategoriModel

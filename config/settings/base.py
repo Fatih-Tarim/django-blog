@@ -133,6 +133,10 @@ LOGGING = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'blogapp.api.pagination.MediumPagination',
+}
+
 
 # import sentry_sdk
 # from sentry_sdk.integrations.django import DjangoIntegration
