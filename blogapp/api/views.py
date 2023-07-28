@@ -12,7 +12,7 @@ from blogapp.models import YorumModel, YazilarModel, KategoriModel
 from blogapp.api.serializers import YorumSerializer, YazilarSerializer, KategoriSerializer
 
 #permissions
-from blogapp.api.permissions import CommentOwnerOrReadOnly, IsSuperUser
+from blogapp.api.permissions import CommentOwnerOrReadOnly, IsSuperUser, BlogOwnerOrReadOnly
 
 class YorumViewSet(ModelViewSet): 
     queryset = YorumModel.objects.all()
@@ -20,10 +20,15 @@ class YorumViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated, CommentOwnerOrReadOnly]
     lookup_field = "yorum"
 
-class YazilarViewSet(ReadOnlyModelViewSet):
+class YazilarViewSet(ModelViewSet):
     queryset = YazilarModel.objects.all()
     serializer_class = YazilarSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, BlogOwnerOrReadOnly]
+    lookup_field = "slug"
+
+    def perform_create(self, serializer):
+        yazar = self.request.user
+        serializer.save(yazar=yazar)
 
 
 class KategoriViewSet(ModelViewSet):
@@ -31,10 +36,6 @@ class KategoriViewSet(ModelViewSet):
     serializer_class = KategoriSerializer
     permission_classes = [IsAuthenticated, IsSuperUser]
     lookup_field = "slug"
-
-
-
-
 
 
 

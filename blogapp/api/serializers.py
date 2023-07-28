@@ -4,18 +4,10 @@ from blogapp.models import YorumModel, YazilarModel, KategoriModel
 
 
 class YorumSerializer(serializers.ModelSerializer):
-    # yazar = serializers.SerializerMethodField()
-    # yazi = serializers.SerializerMethodField()
     class Meta:
         model = YorumModel
         fields = "__all__"
 
-    # def get_yazar(self, obj):
-    #     return f"{obj.yazar}"
-
-    # def get_yazi(self,obj):
-    #     return f"{obj.yazi}"
-    
     #serializer içerisinde string karşılıklarını almak 
     def get_yazar(self, obj):
         yazar = obj.yazar  
@@ -32,12 +24,19 @@ class YorumSerializer(serializers.ModelSerializer):
         return data
 
 class YazilarSerializer(serializers.ModelSerializer):
-    resim = serializers.ImageField(read_only=True)
-    kategoriler = serializers.StringRelatedField(many=True, read_only=True)
-    yazar = serializers.StringRelatedField(read_only=True)
+    resim = serializers.ImageField(read_only=False)
+    yazar = serializers.StringRelatedField(read_only=False)
+
     class Meta:
         model = YazilarModel
         fields = "__all__"
+    
+    def perform_create(self, serializer):
+        yazar = self.request.user
+        serializer.save(yazar= yazar)
+    
+
+    
 
 class KategoriSerializer(serializers.ModelSerializer):
     class Meta:
