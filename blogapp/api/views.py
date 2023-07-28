@@ -16,12 +16,20 @@ from blogapp.api.permissions import CommentOwnerOrReadOnly, IsSuperUser, BlogOwn
 #pagination
 from blogapp.api.pagination import SmallPagination, MediumPagination, LargePagination
 
+#filters
+from rest_framework.filters import SearchFilter, OrderingFilter
+from blogapp.api.filters import YorumFilter
+
 class YorumViewSet(ModelViewSet): 
     queryset = YorumModel.objects.all()
     serializer_class = YorumSerializer
     permission_classes = [IsAuthenticated, CommentOwnerOrReadOnly]
     lookup_field = "yorum"
     pagination_class = MediumPagination
+    filter_backends = [YorumFilter, SearchFilter]
+    search_fields = ['yorum', 'yazar__username']
+
+ 
 
 class YazilarViewSet(ModelViewSet):
     queryset = YazilarModel.objects.all().order_by("id")
@@ -29,6 +37,8 @@ class YazilarViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated, BlogOwnerOrReadOnly]
     lookup_field = "slug"
     pagination_class = LargePagination
+    filter_backends = [SearchFilter]
+    search_fields = ['baslik', 'yazar__username']
 
     def perform_create(self, serializer):
         yazar = self.request.user
@@ -41,6 +51,8 @@ class KategoriViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated, IsSuperUser]
     lookup_field = "slug"
     pagination_class = SmallPagination
+    filter_backends = [SearchFilter]
+    search_fields = ['isim']
 
 
 
