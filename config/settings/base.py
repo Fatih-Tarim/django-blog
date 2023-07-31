@@ -25,12 +25,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'account',
     'blogapp',
     'rest_framework',
     #third party
     'ckeditor',
     'crispy_forms',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    # 'allauth.account',
+    'allauth.socialaccount',
+
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -134,9 +142,16 @@ LOGGING = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'blogapp.api.pagination.MediumPagination',
 }
 
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = (True,)
 
 # import sentry_sdk
 # from sentry_sdk.integrations.django import DjangoIntegration
