@@ -8,9 +8,9 @@ from rest_framework.routers import DefaultRouter
 # yorum_detay = YorumViewSet.as_view({'get': 'retrieve'})
 
 router = DefaultRouter()
-router.register('yorumlar', YorumViewSet)
-router.register('yazilar', YazilarViewSet)
-router.register('kategoriler', KategoriViewSet)
+router.register('yorumlar', YorumViewSet, basename="yorumlar")
+router.register('yazilar', YazilarViewSet, basename="yazilar")
+router.register('kategoriler', KategoriViewSet, basename="kategoriler")
 
 urlpatterns = [
      path('', include(router.urls)),
