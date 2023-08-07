@@ -3,7 +3,8 @@ from blogapp.models import (
     KategoriModel,
     YazilarModel,
     YorumModel,
-    IletisimModel
+    IletisimModel,
+    UserDataModel
 )
 
 admin.site.register(KategoriModel)
@@ -29,3 +30,9 @@ class YorumAdmin(admin.ModelAdmin):
 class IletisimAdmin(admin.ModelAdmin):
     list_display = ('email','isim_soyisim','mesaj','olusturma_tarihi')
     search_fields = ('email',)
+
+@admin.register(UserDataModel)
+class UserDataModelAdmin(admin.ModelAdmin):
+    list_display = ('gender','age','estimated_salary')
+    search_fields = ('purschased',)
+
